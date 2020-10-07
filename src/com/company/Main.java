@@ -48,10 +48,11 @@ public class Main {
             {0, 7, 0, 9, 0, 0, 0, 5, 0},
             {0, 0, 2, 4, 0, 0, 0, 0, 8}
     };
+
     static void Boards(int[][] scores) {
         int value = 0;
         for (int i = 0; i < scores.length; i++) { //affichage du tableau
-            for (int j =0; j < scores[i].length; j++) {
+            for (int j = 0; j < scores[i].length; j++) {
                 value = scores[i][j];
                 System.out.print(value + " ");
             }
@@ -59,15 +60,63 @@ public class Main {
         }
     }
 
+    static boolean Ligne (int [][] oui, int ligne){
+        for (int i = 1; i < 10; i++) {
+
+
+            int value = 0;
+            for (int colonne = 0;  colonne < oui.length; colonne++) {
+                if (i == oui[ligne][colonne]) {
+                    value ++;
+
+                }
+                if (value > 1) {
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+    static boolean Colonne (int [][] oui, int colonne){
+        for (int i = 1; i < 10; i++) {
+
+
+            int value = 0;
+            for (int ligne = 0;  ligne < oui.length; ligne++) {
+                if (i == oui[ligne][colonne]) {
+                    value ++;
+
+                }
+                if (value > 1) {
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+
+
+
+
     public static void main(String[] args) {
+
+
         System.out.println("Difficulté : easy");
         Boards(boardEasy);
-        System.out.println("Difficulté : moyen ");
-        Boards(boardMedium);
-        System.out.println("Difficulté : hard");
-        Boards(boardHard);
-        System.out.println("Difficulté : Legend");
-        Boards(boardGodLike);
+        //System.out.println("Difficulté : moyen ");
+        //Boards(boardMedium);
+        //System.out.println("Difficulté : hard");
+        //Boards(boardHard);
+        //System.out.println("Difficulté : Legend");
+        //Boards(boardGodLike);
+        System.out.println(Ligne(boardEasy,0));
+        System.out.println(Colonne(boardEasy,0));
+
+
+
+
     }
 
 }
