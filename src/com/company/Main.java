@@ -97,6 +97,21 @@ public class Main {
         return true;
     }
 
+    static boolean section1 (int [][]oui){
+        int value = 0;
+        for (int i = 0; i > 3; i++) {
+            for (int j = 0; j > 3; j++) {
+                if (value == oui[i][j]);
+                value ++;
+            }
+            if (value > 1) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
 
 
 
@@ -113,6 +128,7 @@ public class Main {
         //Boards(boardGodLike);
         System.out.println(Ligne(boardEasy,0));
         System.out.println(Colonne(boardEasy,0));
+        System.out.println(section1(boardEasy));
 
 
 
