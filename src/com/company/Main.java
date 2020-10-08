@@ -49,6 +49,10 @@ public class Main {
             {0, 0, 2, 4, 0, 0, 0, 0, 8}
     };
 
+    /**
+     * sert à afficher n'importe quel tableau
+     * @param scores sert à prendre la taille du tableau en ligne et colonne
+     */
     static void Boards(int[][] scores) {
         int value = 0;
         for (int i = 0; i < scores.length; i++) {     //affichage du tableau
@@ -60,6 +64,11 @@ public class Main {
         }
     }
 
+    /**
+     * vérifie chacun des lignes pour savoir si elles sont dans les règles
+     * @param oui prend la taille du tableau
+     * @return annonce vrai ou faux lorsqu'il y'a un nombre identique ou non
+     */
     static boolean Ligne (int [][] oui) {
         int ligne = 0;
         while (ligne < 9) {
@@ -82,9 +91,16 @@ public class Main {
         return true;
 
     }
+
+    /**
+     * vérifie chacune des colonnes pour savoir si elles sont dans les règles
+     * @param oui prend la taille du tableau
+     * @return annonce vrai ou faux lorsqu'il y'a un nombre identique ou non
+     */
     static boolean Colonne (int [][] oui){
         int colonne = 0;
         while (colonne < 9) {
+            //vérifie tout les nombres de 1 à 9
         for (int i = 1; i < 10; i++) {
             int value = 0;
             for (int ligne = 0; ligne < oui.length; ligne++) {
@@ -102,16 +118,28 @@ public class Main {
         return true;
     }
 
-    static boolean section1 (int [][]oui){ //vérifie la premiere section (haut à gauche) en 3x3 de la grille
-        int value = 0;
-        for (int i = 0; i > 3; i++) {
-            for (int j = 0; j > 3; j++) {
-                if (value == oui[i][j]);
-                value ++;
+    /**
+     * vérifie si la section 1 de la grille est dans les règles
+     * @param oui prend le taille du tableau
+     * @param colonne prends le numéro de la colonne
+     * @param ligne prends le numéro de la ligne
+     * @return annonce vrai ou faux si nombre identique ou non
+     */
+    static boolean section1 (int [][]oui, int colonne, int ligne) {
+        //vérifie la premiere section (haut à gauche) en 3x3 de la grille
+        int value = 3;
+        for (int num = 0; num < 10; num++) {
+            int counter = 0;
+            for (int i = ligne; i < ligne + value; i++) {
+                for (int j = colonne; j > colonne + value; j++) {
+                    if (value == oui[i][j]) ;
+                    counter++;
+                }
+                if (counter > 1) {
+                    return false;
+                }
             }
-            if (value > 1) {
-                return false;
-            }
+
         }
         return true;
 
@@ -131,9 +159,9 @@ public class Main {
         //Boards(boardHard);
         //System.out.println("Difficulté : Legend");
         //Boards(boardGodLike);
-        System.out.println(Ligne(boardEasy,0));
-        System.out.println(Colonne(boardEasy,0));
-        System.out.println(section1(boardEasy));
+        System.out.println(Ligne(boardEasy));
+        System.out.println(Colonne(boardEasy));
+        System.out.println(section1(boardEasy, 0, 0));
 
 
 
