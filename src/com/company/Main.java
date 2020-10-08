@@ -51,7 +51,7 @@ public class Main {
 
     static void Boards(int[][] scores) {
         int value = 0;
-        for (int i = 0; i < scores.length; i++) { //affichage du tableau
+        for (int i = 0; i < scores.length; i++) {     //affichage du tableau
             for (int j = 0; j < scores[i].length; j++) {
                 value = scores[i][j];
                 System.out.print(value + " ");
@@ -60,44 +60,49 @@ public class Main {
         }
     }
 
-    static boolean Ligne (int [][] oui, int ligne){
+    static boolean Ligne (int [][] oui) {
+        int ligne = 0;
+        while (ligne < 9) {
+            for (int i = 1; i < 10; i++) {
+                int value = 0;
+                for (int colonne = 0; colonne < oui.length; colonne++) {
+                    if (i == oui[ligne][colonne]) {
+                        value++;
+
+                    }
+                    if (value > 1) {
+                        return false;
+                    }
+                }
+
+            }
+            ligne = ligne + 1;
+
+        }
+        return true;
+
+    }
+    static boolean Colonne (int [][] oui){
+        int colonne = 0;
+        while (colonne < 9) {
         for (int i = 1; i < 10; i++) {
-
-
             int value = 0;
-            for (int colonne = 0;  colonne < oui.length; colonne++) {
+            for (int ligne = 0; ligne < oui.length; ligne++) {
                 if (i == oui[ligne][colonne]) {
-                    value ++;
+                    value++;
 
                 }
                 if (value > 1) {
                     return false;
                 }
             }
-
         }
-        return true;
-    }
-    static boolean Colonne (int [][] oui, int colonne){
-        for (int i = 1; i < 10; i++) {
-
-
-            int value = 0;
-            for (int ligne = 0;  ligne < oui.length; ligne++) {
-                if (i == oui[ligne][colonne]) {
-                    value ++;
-
-                }
-                if (value > 1) {
-                    return false;
-                }
-            }
-
+        colonne = colonne + 1;
         }
         return true;
     }
 
-    static boolean section1 (int [][]oui){
+    static boolean section1 (int [][]oui){ //vérifie la premiere section (haut à gauche) en 3x3 de la grille
         int value = 0;
         for (int i = 0; i > 3; i++) {
             for (int j = 0; j > 3; j++) {
