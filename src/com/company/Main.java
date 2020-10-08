@@ -157,6 +157,19 @@ public class Main {
         }
         return true;
     }
+    static boolean Grille (int[][] oui){
+        if (Ligne(oui)== true) {
+            if (Colonne(oui) == true) {
+                if (AllSection(oui) == true) {
+
+                }
+            }
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 
 
@@ -175,7 +188,7 @@ public class Main {
         System.out.println("vérification des lignes : " + Ligne(boardEasy));
         System.out.println("vérification des colonnes : " + Colonne(boardEasy));
         System.out.println("vérification des sections : " + AllSection(boardEasy));
-        System.out.println();
+        System.out.println("vérification de la grille : " + Grille(boardEasy));
 
 
 
