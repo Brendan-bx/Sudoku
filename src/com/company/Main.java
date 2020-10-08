@@ -144,6 +144,19 @@ public class Main {
         return true;
 
     }
+    static boolean AllSection (int [][] oui){
+        for (int LigneSec = 0; LigneSec < 7; LigneSec = LigneSec + 3) {
+            for (int ColonneSec = 0; ColonneSec < 7; ColonneSec = ColonneSec + 3) {
+                if (section1(oui, LigneSec, ColonneSec)== true) {
+                    continue;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 
 
@@ -159,9 +172,10 @@ public class Main {
         //Boards(boardHard);
         //System.out.println("Difficulté : Legend");
         //Boards(boardGodLike);
-        System.out.println(Ligne(boardEasy));
-        System.out.println(Colonne(boardEasy));
-        System.out.println(section1(boardEasy, 0, 0));
+        System.out.println("vérification des lignes : " + Ligne(boardEasy));
+        System.out.println("vérification des colonnes : " + Colonne(boardEasy));
+        System.out.println("vérification des sections : " + AllSection(boardEasy));
+        System.out.println();
 
 
 
