@@ -1,6 +1,7 @@
 package com.company;
 
 public class Main {
+    static int compteur = 0;
     static int[][] boardEasy = {
             {4, 0, 0, 1, 0, 2, 6, 8, 0},
             {1, 0, 0, 0, 9, 0, 0, 0, 4},
@@ -132,6 +133,7 @@ public class Main {
     static boolean section1(int[][] oui, int colonne, int ligne) {
         //vérifie la premiere section (haut à gauche) en 3x3 de la grille
         int value = 3;
+        //test tout les nombres de 1 à 9
         for (int num = 0; num < 10; num++) {
             int counter = 0;
             for (int i = ligne; i < ligne + value; i++) {
@@ -189,8 +191,7 @@ public class Main {
 
 
     static boolean Remplissage(int[][] oui, int position) {
-        //int a = 0;
-        //int b = 0;
+        int c= 0;
         //pour respecter la taille de la grille
         if (position == 9 * 9) {
             return true;
@@ -210,6 +211,7 @@ public class Main {
                 for (int num = 1; num < 10; num++){
                     //on met le num dans la grille
                     oui[a][b] = num;
+                    compteur++;
                 if (Grille(oui)) {
                     if (Remplissage(oui, position + 1)) {
                         //si cela fonctionne on continue
@@ -224,6 +226,8 @@ public class Main {
     }
         return true;
     }
+
+
 
     public static void main(String[] args) {
         int[][] board = boardEasy;
@@ -242,7 +246,9 @@ public class Main {
         Remplissage(board, 0);
         Boards(board);
 
+        System.out.println("nombre de coups : "+ compteur);
 
     }
+
 
 }
