@@ -177,12 +177,7 @@ public class Main {
      * @return vrai ou faux si il y'a un nombre identique ou non
      */
     static boolean Grille(int[][] oui) {
-        if (Ligne(oui) == true) {
-            if (Colonne(oui) == true) {
-                if (AllSection(oui) == true) {
-
-                }
-            }
+        if (Ligne(oui) == true && Colonne(oui)==true && AllSection(oui)==true) {
             return true;
         } else {
             return false;
@@ -191,7 +186,6 @@ public class Main {
 
 
     static boolean Remplissage(int[][] oui, int position) {
-        int c= 0;
         //pour respecter la taille de la grille
         if (position == 9 * 9) {
             return true;
