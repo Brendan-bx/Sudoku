@@ -51,6 +51,7 @@ public class Main {
 
     /**
      * sert à afficher n'importe quel tableau
+     *
      * @param scores sert à prendre la taille du tableau en ligne et colonne
      */
     static void Boards(int[][] scores) {
@@ -66,10 +67,11 @@ public class Main {
 
     /**
      * vérifie chacun des lignes pour savoir si elles sont dans les règles
+     *
      * @param oui prend la taille du tableau
      * @return annonce vrai ou faux lorsqu'il y'a un nombre identique ou non
      */
-    static boolean Ligne (int [][] oui) {
+    static boolean Ligne(int[][] oui) {
         int ligne = 0;
         while (ligne < 9) {
             for (int i = 1; i < 10; i++) {
@@ -94,38 +96,40 @@ public class Main {
 
     /**
      * vérifie chacune des colonnes pour savoir si elles sont dans les règles
+     *
      * @param oui prend la taille du tableau
      * @return annonce vrai ou faux lorsqu'il y'a un nombre identique ou non
      */
-    static boolean Colonne (int [][] oui){
+    static boolean Colonne(int[][] oui) {
         int colonne = 0;
         while (colonne < 9) {
             //vérifie tout les nombres de 1 à 9
-        for (int i = 1; i < 10; i++) {
-            int value = 0;
-            for (int ligne = 0; ligne < oui.length; ligne++) {
-                if (i == oui[ligne][colonne]) {
-                    value++;
+            for (int i = 1; i < 10; i++) {
+                int value = 0;
+                for (int ligne = 0; ligne < oui.length; ligne++) {
+                    if (i == oui[ligne][colonne]) {
+                        value++;
 
-                }
-                if (value > 1) {
-                    return false;
+                    }
+                    if (value > 1) {
+                        return false;
+                    }
                 }
             }
-        }
-        colonne = colonne + 1;
+            colonne = colonne + 1;
         }
         return true;
     }
 
     /**
      * vérifie si la section 1 de la grille est dans les règles
-     * @param oui prend le taille du tableau
+     *
+     * @param oui     prend le taille du tableau
      * @param colonne prends le numéro de la colonne
-     * @param ligne prends le numéro de la ligne
+     * @param ligne   prends le numéro de la ligne
      * @return annonce vrai ou faux si nombre identique ou non
      */
-    static boolean section1 (int [][]oui, int colonne, int ligne) {
+    static boolean section1(int[][] oui, int colonne, int ligne) {
         //vérifie la premiere section (haut à gauche) en 3x3 de la grille
         int value = 3;
         for (int num = 0; num < 10; num++) {
@@ -144,41 +148,87 @@ public class Main {
         return true;
 
     }
-    static boolean AllSection (int [][] oui){
+
+    /**
+     * vérifie si toutes les sections sont dans les règles
+     *
+     * @param oui prend la taille du tableau
+     * @return vrai ou faux si nombre identique ou non
+     */
+    static boolean AllSection(int[][] oui) {
         for (int LigneSec = 0; LigneSec < 7; LigneSec = LigneSec + 3) {
             for (int ColonneSec = 0; ColonneSec < 7; ColonneSec = ColonneSec + 3) {
-                if (section1(oui, LigneSec, ColonneSec)== true) {
+                if (section1(oui, LigneSec, ColonneSec) == true) {
                     continue;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
         }
         return true;
     }
-    static boolean Grille (int[][] oui){
-        if (Ligne(oui)== true) {
+
+    /**
+     * vérifie si toute la grille est dans les règles
+     *
+     * @param oui
+     * @return vrai ou faux si il y'a un nombre identique ou non
+     */
+    static boolean Grille(int[][] oui) {
+        if (Ligne(oui) == true) {
             if (Colonne(oui) == true) {
                 if (AllSection(oui) == true) {
 
                 }
             }
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
 
-
+    static boolean Remplissage(int[][] oui, int position) {
+        //int a = 0;
+        //int b = 0;
+        //pour respecter la taille de la grille
+        if (position == 9 * 9) {
+            return true;
+        }
+        // coordonnées d'une case
+        int a = position / 9;
+        int b = position % 9;
+        // si un nombre différent de 0 est présent on passe à la prochaine case
+        if (oui[a][b] != 0) {
+            return Remplissage(oui, position + 1);
+        }
+        //vérification des lignes
+        for (int ligne = a; ligne < 9; ligne++) {
+            //vérification des colonnes
+            for (int colonne = b; colonne < 9; colonne++) {
+                //test de tout les nombres de 1 à 10
+                for (int num = 1; num < 10; num++){
+                    //on met le num dans la grille
+                    oui[a][b] = num;
+                if (Grille(oui)) {
+                    if (Remplissage(oui, position + 1)) {
+                        //si cela fonctionne on continue
+                        return true;
+                    }
+                }
+            }
+            //aucun nombre ne fonctionne donc false
+            oui[a][b] = 0;
+            return false;
+        }
+    }
+        return true;
+    }
 
     public static void main(String[] args) {
-
-
+        int[][] board = boardEasy;
         System.out.println("Difficulté : easy");
-        Boards(boardEasy);
+        Boards(board);
         //System.out.println("Difficulté : moyen ");
         //Boards(boardMedium);
         //System.out.println("Difficulté : hard");
@@ -189,8 +239,8 @@ public class Main {
         System.out.println("vérification des colonnes : " + Colonne(boardEasy));
         System.out.println("vérification des sections : " + AllSection(boardEasy));
         System.out.println("vérification de la grille : " + Grille(boardEasy));
-
-
+        Remplissage(board, 0);
+        Boards(board);
 
 
     }
